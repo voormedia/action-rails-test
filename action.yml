@@ -5,7 +5,7 @@ runs:
   image: Dockerfile
   args:
     - |
-      ssh-keyscan github.com >> ~/.ssh/known_hosts
+      ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
       bundle install
       bundle exec rails db:create db:structure:load
       bundle exec rails test
