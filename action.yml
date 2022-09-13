@@ -11,7 +11,7 @@ runs:
 
   # eval $(ssh-agent) &&
   # ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}' &&
-  entrypoint: ["sh", "-c"]
+  entrypoint: "/bin/sh -c"
   args:
     - bundle install
     - bundle exec rails db:create db:structure:load
