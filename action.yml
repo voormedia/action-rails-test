@@ -3,7 +3,7 @@ description: Run Rails lints & tests
 runs:
   using: docker
   image: Dockerfile
-  args: |
+  args: - |
     bundle install
     bundle exec rails db:create db:structure:load
     bundle exec rails test
