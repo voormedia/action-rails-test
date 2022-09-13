@@ -1,13 +1,5 @@
 name: Rails test
 description: Run Rails lints & tests
-inputs:
-  version:
-    description: Version of Alpine Linux to run tests on
-    required: false
-    default: 3.16
 runs:
   using: docker
   image: Dockerfile
-  args:
-    - --build-arg
-    - "version=${{ inputs.version }}"
