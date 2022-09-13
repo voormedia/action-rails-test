@@ -4,4 +4,6 @@ FROM voormedia/ruby-build:3.16
 ENV \
 RAILS_ENV=test
 
-ENTRYPOINT ["run.sh"]
+COPY run.sh /run.sh
+
+ENTRYPOINT ["/run.sh"]
