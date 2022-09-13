@@ -9,7 +9,10 @@ runs:
     DISABLE_SPRING: 1
     BUNDLE_SILENCE_ROOT_WARNING: 1
 
-  entrypoint: |
-    bundle install &&
-    bundle exec rails db:create db:structure:load &&
-    bundle exec rails test
+  # eval $(ssh-agent) &&
+  # ssh-add - <<< '${{ secrets.PRIVATE_SSH_KEY }}' &&
+  entrypoint: "sh -c"
+  args:
+    - bundle install
+    - bundle exec rails db:create db:structure:load
+    - bundle exec rails test
