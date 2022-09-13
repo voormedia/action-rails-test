@@ -6,6 +6,9 @@ runs:
   args:
     - |
       ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
+      eval $(ssh-agent)
+      echo '${{ secrets.SSH_PRIVATE_KEY }}' | ssh-add -
+
       bundle install
       bundle exec rails db:create db:structure:load
       bundle exec rails test
