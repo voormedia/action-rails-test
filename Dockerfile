@@ -2,7 +2,8 @@
 FROM voormedia/ruby-build:3.16
 
 ENV \
-RAILS_ENV=test
+RAILS_ENV=test \
+DISABLE_SPRING=1
 
 COPY run.sh /run.sh
 
