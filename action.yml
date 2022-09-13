@@ -2,4 +2,16 @@ name: Rails test
 description: Run Rails lints & tests
 runs:
   using: docker
-  image: Dockerfile
+  image: docker://voormedia/ruby-build:3.16
+
+  env:
+    RAILS_ENV: test
+    DISABLE_SPRING: 1
+    BUNDLE_SILENCE_ROOT_WARNING: 1
+    TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+  entrypoint: |
+    git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/" &&
+    bundle install &&
+    bundle exec rails db:create db:structure:load &&
+    bundle exec rails test
