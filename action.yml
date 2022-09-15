@@ -4,6 +4,7 @@ input:
   token:
     description: A Github personal access token (PAT)
     required: false
+    default: ""
 runs:
   using: docker
   image: Dockerfile
