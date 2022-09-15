@@ -1,18 +1,19 @@
 name: Rails test
 description: Run Rails lints & tests
-input:
+
+inputs:
   token:
     description: A Github personal access token (PAT)
     required: false
     default: ""
+
 runs:
   using: docker
-  image: Dockerfile
+  image: docker://voormedia/ruby-build:3.16
   env:
     RAILS_ENV: test
     DISABLE_SPRING: 1
 
-  # GH_CLONE_TOKEN must be set in Organisation Secrets for GH Actions.
   args:
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
