@@ -17,6 +17,7 @@ runs:
   args:
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
+    - bundle config --global silence_root_warning true
     - bundle install
     - bundle exec rails db:create db:structure:load
     - bundle exec rails test
