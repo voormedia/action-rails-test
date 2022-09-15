@@ -4,11 +4,8 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - |
-      ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
-      git config --global url."https://oauth2:${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
-      echo "hi"
-      echo ${GITHUB_TOKEN}
-      bundle install
-      bundle exec rails db:create db:structure:load
-      bundle exec rails test
+    - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
+    - git config --global url."https://oauth2:${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
+    - bundle install
+    - bundle exec rails db:create db:structure:load
+    - bundle exec rails test

@@ -1,9 +1,8 @@
 #!/bin/sh
 
-set -e
-set -o pipefail
+# Bail out if any command fails.
+set -e -o pipefail
 
-
-echo ">>> Running command"
-
-sh -c "set -e; set -o pipefail; $1"
+for cmd in "$@"; do
+  sh -c "${cmd}"
+done
