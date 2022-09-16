@@ -5,11 +5,14 @@ inputs:
   token:
     description: A Github personal access token (PAT)
     required: false
-    default: ""
+  version:
+    description: Alpine OS version
+    required: false
+    default: 3.15
 
 runs:
   using: docker
-  image: docker://voormedia/ruby-build:3.16
+  image: docker://voormedia/ruby-build:${{ inputs.version }}
   env:
     RAILS_ENV: test
     DISABLE_SPRING: 1
