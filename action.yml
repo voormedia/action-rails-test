@@ -9,7 +9,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://voormedia/ruby-build:3.15
+  image: docker://voormedia/ruby-build:3.14
   env:
     RAILS_ENV: test
     DISABLE_SPRING: 1
