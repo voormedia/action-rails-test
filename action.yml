@@ -25,5 +25,6 @@ runs:
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
     - bundle config --global silence_root_warning true
     - bundle install
-    - bundle exec rails db:create db:structure:load
+    - bundle exec rails db:create
+    - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
     - bundle exec ${{ inputs.command }}
