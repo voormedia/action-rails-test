@@ -14,7 +14,7 @@ inputs:
 runs:
   using: docker
   # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.14&arch=x86_64
-  image: docker://voormedia/ruby-build:3.14
+  image: docker://voormedia/ruby-build:3.16
 
   env:
     RAILS_ENV: test
