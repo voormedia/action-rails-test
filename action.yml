@@ -29,6 +29,7 @@ runs:
     - bundle install
 
     # Run rubocop if configured.
+    # TODO: Extract into separate action? If so, make sure we need to run bundle only once!
     - if [ -f ".rubocop.yml" ]; then bundle exec rubocop; fi
 
     # Create test database.
