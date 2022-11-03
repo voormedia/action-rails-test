@@ -23,8 +23,19 @@ runs:
   args:
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
+
+    # Install dependencies.
     - bundle config --global silence_root_warning true
     - bundle install
+
+    # Run rubocop if configured.
+    - if [ -f ".rubocop.yml" ]; then bundle exec rubocop; fi
+
+    # Create test database.
     - bundle exec rails db:create
+
+    # Load db structure from SQL or Ruby file.
     - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
+
+    # Run tests.
     - bundle exec ${{ inputs.command }}
