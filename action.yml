@@ -9,7 +9,7 @@ inputs:
   command:
     description: Command to run tests
     required: false
-    default: rails test
+    default: bundle exec rails test
 
 runs:
   using: docker
@@ -39,4 +39,4 @@ runs:
     - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
 
     # Run tests.
-    - bundle exec ${{ inputs.command }}
+    - ${{ inputs.command }}
