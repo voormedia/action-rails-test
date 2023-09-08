@@ -35,6 +35,6 @@ steps:
     uses: actions/cache@v3
     with:
       path: vendor/bundle
-      key: ${{ runner.os }}-rails-${{ hashFiles('**/Gemfile.lock') }}
+      key: ${{ github.os }}-rails-${{ hashFiles('**/Gemfile.lock') }}
       restore-keys: |
-        ${{ runner.os }}-rails-
+        ${{ github.os }}-rails-
