@@ -29,12 +29,12 @@ runs:
     - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
     - ${{ inputs.command }}
 
-  # Add cache step
-  steps:
-    - name: Cache bundle and assets
-      uses: actions/cache@v3
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-rails-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-rails-
+# Add cache step
+steps:
+  - name: Cache bundle and assets
+    uses: actions/cache@v3
+    with:
+      path: vendor/bundle
+      key: ${{ runner.os }}-rails-${{ hashFiles('**/Gemfile.lock') }}
+      restore-keys: |
+        ${{ runner.os }}-rails-
