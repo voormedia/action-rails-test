@@ -31,10 +31,10 @@ runs:
 
 # Add cache step
 steps:
-  - name: Cache bundle and assets
-    uses: actions/cache@v3
-    with:
-      path: vendor/bundle
-      key: ${{ github.os }}-rails-${{ hashFiles('**/Gemfile.lock') }}
-      restore-keys: |
-        ${{ github.os }}-rails-
+- uses: actions/checkout@v3
+- uses: actions/setup-node@v3
+  with:
+    node-version: '16'
+    cache: 'yarn'
+- run: yarn install --frozen-lockfile # optional, --immutable
+- run: yarn test
