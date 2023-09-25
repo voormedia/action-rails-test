@@ -32,5 +32,3 @@ runs:
     - bundle exec rails db:create
     - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
     - ${{ inputs.command }}
-  volumes:
-    - ${{ runner.workspace }}/${{ inputs.command }}
