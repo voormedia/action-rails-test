@@ -11,6 +11,10 @@ inputs:
     required: false
     default: bundle exec rails test
 
+  cache:
+    description: Cache dependencies
+    required: false
+
 runs:
   using: docker
   # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.14&arch=x86_64
@@ -28,13 +32,5 @@ runs:
     - bundle exec rails db:create
     - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
     - ${{ inputs.command }}
-
-# Add cache step
-steps:
-- uses: actions/checkout@v3
-- uses: actions/setup-node@v3
-  with:
-    node-version: '16'
-    cache: 'yarn'
-- run: yarn install --frozen-lockfile # optional, --immutable
-- run: yarn test
+  volumes:
+    - ${{ runner.workspace }}/${{ inputs.command }}
