@@ -35,8 +35,6 @@ runs:
     # Create test database.
     - bundle exec rails db:create
 
-    # Load db structure from SQL or Ruby file.
-    - if [ -f "db/structure.sql" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
+    - bundle exec rails db:schema:load
 
-    # Run tests.
     - ${{ inputs.command }}
