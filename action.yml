@@ -13,8 +13,8 @@ inputs:
 
 runs:
   using: docker
-  # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.14&arch=x86_64
-  image: docker://voormedia/ruby-build:3.14
+  # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.17&arch=x86_64
+  image: docker://voormedia/ruby-build:3.17
 
   env:
     RAILS_ENV: test
@@ -23,8 +23,20 @@ runs:
   args:
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
+
+    # Install dependencies.
     - bundle config --global silence_root_warning true
-    - bundle install
+    - bundle install --jobs 8 --retry 3
+
+    # Run rubocop if configured.
+    # TODO: Extract into separate action? If so, make sure we need to run bundle only once!
+    - if [ -f ".rubocop.yml" ]; then bundle exec rubocop; fi
+
+    # Create test database.
     - bundle exec rails db:create
+
+    # Load db structure from SQL or Ruby file.
     - bundle exec rails db:schema:load
+
+    # Run tests.
     - ${{ inputs.command }}
