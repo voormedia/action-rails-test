@@ -36,7 +36,7 @@ runs:
     - bundle exec rails db:create
 
     # Load db structure from SQL or Ruby file.
-    - bundle exec rails db:schema:load
+    - if [ -f "config/sequel.rb" ]; then bundle exec rails db:structure:load; else bundle exec rails db:schema:load; fi
 
     # Run tests.
     - ${{ inputs.command }}
