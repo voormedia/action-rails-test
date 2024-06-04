@@ -13,8 +13,8 @@ inputs:
 
 runs:
   using: docker
-  # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.19&arch=x86_64
-  image: docker://voormedia/ruby-build:3.19
+  # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.20&arch=x86_64
+  image: docker://voormedia/ruby-build:3.20
 
   env:
     RAILS_ENV: test
