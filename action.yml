@@ -6,6 +6,11 @@ inputs:
     description: Github personal access token (PAT) to clone other private repos
     required: false
 
+  setup:
+    description: Setup command to run before tests
+    required: false
+    default: echo
+
   command:
     description: Command to run tests
     required: false
@@ -21,6 +26,8 @@ runs:
     DISABLE_SPRING: 1
 
   args:
+    - ${{ inputs.setup }}
+
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
 
