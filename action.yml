@@ -19,7 +19,8 @@ inputs:
 runs:
   using: docker
   # https://pkgs.alpinelinux.org/packages?name=ruby&branch=v3.20&arch=x86_64
-  image: docker://voormedia/ruby-build:3.20
+  # Point to older image for now because newer versions of Ruby cause issues with custom methods.
+  image: docker://voormedia/ruby-build:3.20@sha256:377f814151d44e17d6854f67fe50630118afedb4e139b77bcb9f5abf909beb00
 
   env:
     RAILS_ENV: test
