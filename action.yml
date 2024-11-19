@@ -31,6 +31,7 @@ runs:
 
     - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts
     - git config --global url."https://x-access-token:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
+    - git config --global url."https://oauth2:${{ inputs.token }}@github.com/".insteadOf "git@github.com:"
 
     # Install dependencies.
     - bundle config --global silence_root_warning true
